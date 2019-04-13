@@ -1,3 +1,5 @@
+I created this repo to test out Nano React App, which is the new hotness that has replaced the increasingly bloated&mdash;but still quite useful&mdash;Create React App. It was definitely easy to get up and running with this project, as described below. I expect to treat this repository a bit like a React sandbox, where I will spin up random, unrelated components at will.
+
 # nano-react-app-template
 
 The template project for [nano-react-app](https://github.com/adrianmcli/nano-react-app).
