@@ -4,8 +4,20 @@ html {
 
 body {
   font-size: 1.5rem;
+  background-color: #d3d3d3;
+}
+
+.counter {
+  padding: 1rem;
 }
 
 .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding: 1rem;
+}
+
+.buttons > button:not(:last-child) {
+  margin-right: 1rem;
 }
