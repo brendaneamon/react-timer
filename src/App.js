@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './main.css'
+
 class StopWatch extends Component {
   static defaultProps = {
     interval: 1000
@@ -11,13 +12,13 @@ class StopWatch extends Component {
   }
 
   incrementCounter = () => {
-    this.setState((prev) => ({ counter: prev.counter + 1 }))
+    this.setState(prev => ({ counter: prev.counter + 1 }))
   }
 
   resetTimer = () => {
     if (this.state.counter === 0) return null
 
-    this.setState((prev) => {
+    this.setState(prev => {
       if (prev.timer) {
         window.clearInterval(prev.timer)
       }
