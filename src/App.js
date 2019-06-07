@@ -52,10 +52,10 @@ class StopWatch extends Component {
           Counter: {counter}
         </div>
         <div className="buttons">
-          <button onClick={() => this.toggleTimer()}>
+          <button onClick={this.toggleTimer}>
             {toggleButtonText}
           </button>
-          <button onClick={() => this.resetTimer()}>
+          <button onClick={this.resetTimer}>
             Reset
           </button>
         </div>
