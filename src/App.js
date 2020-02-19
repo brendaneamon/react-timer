@@ -1,67 +1,49 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import './main.css'
 
-class StopWatch extends Component {
-  static defaultProps = {
-    interval: 1000
+const StopWatch = ({ interval }) => {
+  const [counter, setCounter] = useState(0)
+  const [timerActive, setTimerActive] = useState(false)
+
+  const resetTimer = () => {
+    if (counter === 0) return
+
+    setTimerActive(false)
+    setCounter(0)
   }
 
-  state = {
-    toggleButtonText: 'Start',
-    counter: 0
-  }
+  useEffect(() => {
+    let timer = null
+    if (timerActive) {
+      timer = window.setInterval(() => {
+        setCounter(counter + 1)
+      }, interval)
+    } else if (!timerActive && counter !== 0) {
+      window.clearInterval(timer)
+    }
 
-  incrementCounter = () => {
-    this.setState(prev => ({ counter: prev.counter + 1 }))
-  }
+    return () => window.clearInterval(timer)
+  }, [timerActive, counter])
 
-  resetTimer = () => {
-    if (this.state.counter === 0) return null
-
-    this.setState(prev => {
-      if (prev.timer) {
-        window.clearInterval(prev.timer)
-      }
-      return { timer: null, counter: 0, toggleButtonText: 'Start' }
-    })
-  }
-
-  toggleTimer = () => {
-    this.setState((prev) => {
-      const { timer } = prev
-      if (!timer) {
-        return {
-          timer: window.setInterval(this.incrementCounter, this.props.interval),
-          toggleButtonText: 'Stop'
-        }
-      } else {
-        window.clearInterval(prev.timer)
-        return {
-          timer: null,
-          toggleButtonText: 'Start'
-        }
-      }
-    })
-  }
-
-  render() {
-    const { toggleButtonText, counter } = this.state
-    return (
-      <div>
-        <div className="counter">
-          Counter: {counter}
-        </div>
-        <div className="buttons">
-          <button onClick={this.toggleTimer}>
-            {toggleButtonText}
-          </button>
-          <button onClick={this.resetTimer}>
-            Reset
-          </button>
-        </div>
+  return (
+    <>
+      <div className="counter">
+        Counter: {counter}
       </div>
-    )
-  }
+      <div className="buttons">
+        <button onClick={() => setTimerActive(!timerActive)}>
+          {timerActive ? 'Stop' : 'Start'}
+        </button>
+        <button onClick={resetTimer}>
+          Reset
+        </button>
+      </div>
+    </>
+  )
+}
+
+StopWatch.defaultProps = {
+  interval: 1000
 }
 
 const App = () => (
